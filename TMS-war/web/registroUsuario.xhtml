@@ -1,0 +1,415 @@
+<html class="fixed"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+
+    <h:body>
+        <ui:composition template="/template/template.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <p:growl id="growl" showDetail="true" sticky="true" />
+                    <h:panelGroup  id="paneles">
+                        <h:panelGroup rendered="#{usuarioJSFBean.numPanel==1}">
+
+                            <!-- start: page -->
+
+                            <div class="row col-sm-12 col-md-12 col-lg-12">
+                                <div class=" col-sm-12 col-md-6 col-lg-12" >
+                                    <section class="panel">
+                                        <header class="panel-heading">
+                                            <div class="panel-actions">
+                                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                                                <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss=""></a>
+                                            </div>
+
+                                            <h2 class="panel-title">Detalles de Usuario </h2>
+                                        </header>
+                                        <div class="panel-body">
+                                            <form class="form-horizontal form-bordered" method="get">
+                                                <div class="form-group" style="text-align: left;">
+                                                    <label class="col-md-2 control-label" for="inputDefault">Documento</label>
+                                                    <div class="col-md-2">
+                                                        <p:inputText class="form-control"  value="#{usuarioJSFBean.numerodocumento}"/>
+                                                    </div>
+                                                    <label class="col-md-2 control-label" for="inputDisabled">Nombre</label>
+                                                    <div class="col-md-2">
+                                                        <p:inputText class="form-control" value="#{usuarioJSFBean.primernombre}"/>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+
+                                                        <p:commandLink class="mb-xs mt-xs mr-xs btn btn-info" id="buscar"  value="Buscar"
+                                                                       action="#{usuarioJSFBean.consultarUsuario}"  update="@all"
+                                                                       />
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <p:commandLink class="mb-xs mt-xs mr-xs btn btn-info" id="nuevo"  value="Nuevo"
+                                                                       action="#{usuarioJSFBean.crearUsuario}"  update="@form"
+                                                                       />
+                                                    </div>
+
+                                                </div>
+
+
+
+                                            </form>
+
+                                        </div>
+                                    </section>
+
+                                </div>
+                            </div>  
+
+                            <div class="row col-sm-12 col-md-12 col-lg-12">
+                                <div class="col-sm-12 col-md-12 col-lg-12"  >
+                                    <section class="panel">
+
+                                        <header class="panel-heading">
+                                            <div class="panel-actions">
+                                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                                                <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss=""></a>
+                                            </div>
+                                            <h2 class="panel-title">Usuarios</h2>
+                                            <hr/>
+                                            <div class="panel-body">
+                                                <div class="table-responsive">
+                                                    <p:dataTable styleClass="table mb-none" class="table table-bordered mb-none" value="#{usuarioJSFBean.lstUsuarios}" 
+                                                                 var="item" 
+                                                                 paginatorAlwaysVisible="false"
+                                                                 paginatorPosition="´bottom"
+                                                                 paginator="true" 
+                                                                 emptyMessage="No se encotraron registros">
+                                                        
+                                                        <p:column headerText="Acciones" class="table table-bordered mb-none">
+                                                            <p:commandLink update="@form" actionListener="#{usuarioJSFBean.editarUsuario}">  <i class="fa fa-pencil"></i> 
+                                                            <f:attribute name="usuario" value="#{item}"></f:attribute>
+                                                            </p:commandLink>
+                                                            
+                                                            
+                                                        </p:column>
+                                                        
+                                                        <p:column headerText="Tipo Documento" class="table table-bordered mb-none">
+                                                            #{item.funcionario.persona.tipodocumento.tipodocumento}
+                                                        </p:column>
+                                                        <p:column headerText="Nombre" class="table table-bordered mb-none">
+                                                            #{item.funcionario.persona.primernombre}
+                                                        </p:column>
+                                                        <p:column headerText="Apellido" class="table table-bordered mb-none">
+                                                            #{item.funcionario.persona.primerapellido}
+                                                        </p:column>
+                                                        <p:column headerText="Documento" class="table table-bordered mb-none">
+                                                            #{item.funcionario.persona.numerodocumento}
+                                                        </p:column>
+                                                        <p:column headerText="Usuario" class="table table-bordered mb-none">
+                                                            #{item.usuario}
+                                                        </p:column>
+                                                        <p:column headerText="Estado" class="table table-bordered mb-none">
+                                                            #{item.estado}
+                                                        </p:column>
+                                                        <p:column headerText="E-mail" class="table table-bordered mb-none">
+                                                            #{item.funcionario.persona.emailpersona}
+                                                        </p:column>
+                                                        <p:column headerText="Dirección" class="table table-bordered mb-none">
+                                                            #{item.funcionario.persona.direccionpersona}
+                                                        </p:column>
+                                                        <p:column headerText="Teléfono" class="table table-bordered mb-none">
+                                                            #{item.funcionario.persona.telefonopersona}
+                                                        </p:column>
+
+
+                                                    </p:dataTable>  
+
+
+                                                </div>
+                                            </div>
+                                        </header>
+                                    </section>
+                                </div>
+                            </div>
+
+
+                        </h:panelGroup>
+
+                        
+                        <h:panelGroup rendered="#{usuarioJSFBean.numPanel==2}">
+
+
+                            <div class="row col-sm-12 col-md-12 col-lg-12">
+                                <div class=" col-sm-12 col-md-6 col-lg-12" >
+                                    <section class="panel">
+                                        <header class="panel-heading">
+                                            <div class="panel-actions">
+                                                <a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>
+                                                <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss=""></a>
+                                            </div>
+
+                                            <h2 class="panel-title">Detalles de Usuario </h2>
+                                        </header>
+                                        <div class="panel-body">
+                                            <form class="form-horizontal form-bordered">
+
+                                                <div class="form-group" style="text-align: left;">
+
+
+
+
+                                                    <div class="form-group">
+
+                                                        <p:outputLabel class="col-md-6 control-label"  value="Primer Nombre" />
+                                                        <div class="col-md-6">
+                                                            <p:inputText class="form-control"  
+                                                                         type="text" 
+                                                                         placeholder="Nombre"  
+                                                                         value="#{usuarioJSFBean.usuario.funcionario.persona.primernombre}" 
+                                                                         maxlength="100"
+                                                                         required="true"/>
+                                                            <span class="required">*</span>
+                                                        </div>
+                                                        
+
+                                                    </div>
+
+                                                    <hr/>
+
+                                                    <div class="form-group">
+
+                                                        <p:outputLabel class="col-md-6 control-label"  value="Segundo Nombre" />
+                                                        <div class="col-md-6">
+                                                            <p:inputText class="form-control"  
+                                                                         placeholder="Nombre"  
+                                                                         value="#{usuarioJSFBean.usuario.funcionario.persona.segundonombre}" 
+                                                                         maxlength="100"/>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <hr/>
+                                                    <div class="form-group">
+                                                        <p:outputLabel class="col-md-6 control-label"  value="Primer Apellido" />
+                                                        <div class="col-md-6">
+                                                            <p:inputText class="form-control"  
+                                                                         placeholder="Apellido"  
+                                                                         value="#{usuarioJSFBean.usuario.funcionario.persona.primerapellido}" 
+                                                                         maxlength="100"
+                                                                         required="true"/>
+                                                            <span class="required">*</span>
+                                                        </div>
+                                                        <hr/>
+                                                    </div>
+                                                    <hr/>
+
+                                                    <div class="form-group">
+                                                        <p:outputLabel class="col-md-6 control-label"  value="Segundo Apellido" />
+                                                        <div class="col-md-6">
+                                                            <p:inputText class="form-control"  
+                                                                         placeholder="Apellido"  
+                                                                         value="#{usuarioJSFBean.usuario.funcionario.persona.segundoapellido}" 
+                                                                         maxlength="100"/>
+                                                        </div>
+                                                        <hr/>
+                                                    </div>
+                                                    <hr/>
+
+                                                    <div class="form-group" >
+
+
+                                                        <h:panelGrid columns="2" class="col-md-12">
+                                                            <p:outputLabel value="Tipo Documento"  class="col-md-6 control-label" />
+                                                            <h:selectOneMenu value="#{usuarioJSFBean.usuario.funcionario.persona.tipodocumento.idtipodocumento}" class="col-md-6 form-control" >
+                                                                <f:selectItems  class="col-md-6 form-control" value="#{usuarioJSFBean.lstTipodocumento}" var="tipos" itemLabel="#{tipos.tipodocumento}"
+                                                                                itemValue="#{tipos.idtipodocumento}">
+
+                                                                </f:selectItems>
+                                                            </h:selectOneMenu>
+                                                            <span class="required">*</span>
+
+                                                        </h:panelGrid>
+
+                                                    </div>
+
+                                                    <hr/>
+                                                    <div class="form-group">
+                                                        <p:outputLabel class="col-md-6 control-label"  value="Documento" />
+                                                        <div class="col-md-6">
+                                                            <p:inputText class="form-control"  
+                                                                         placeholder="Ingrese Documento" 
+                                                                         value="#{usuarioJSFBean.usuario.funcionario.persona.numerodocumento}" 
+                                                                         maxlength="50"
+                                                                         required="true"/>
+                                                            <span class="required">*</span>
+                                                        </div>
+                                                    </div>
+                                                    <hr/>
+
+                                                    <div class="form-group">
+                                                        <p:outputLabel class="col-md-6 control-label"  value="Usuario" />
+                                                        <div class="col-md-6">
+                                                            <p:inputText class="form-control"  
+                                                                         placeholder="Ingrese su Usuario" 
+                                                                         value="#{usuarioJSFBean.usuario.usuario}"
+                                                                         required="true"
+                                                                         maxlength="25"/>
+                                                        </div>
+                                                    </div>
+                                                    <hr/>
+
+                                                                                                        
+                                                    <div class="form-group">
+                                                        <p:outputLabel class="col-md-6 control-label"  value="Dirección" />
+                                                        <div class="col-md-6">
+                                                            <p:inputText class="form-control"  
+                                                                         placeholder="Ingrese Dirección"  
+                                                                         value="#{usuarioJSFBean.usuario.funcionario.persona.direccionpersona}"
+                                                                         maxlength="100"/>
+                                                        </div>
+                                                    </div>
+                                                    <hr/>
+                                                    
+                                                    
+                                                    
+                                                    <div class="form-group">
+                                                        <p:outputLabel class="col-md-6 control-label"  value="E-mail" />
+                                                        <div class="col-md-6">
+                                                            <p:inputText class="form-control" 
+                                                                         placeholder="Ejemplo: example@colfrigos.com" 
+                                                                         value="#{usuarioJSFBean.usuario.funcionario.persona.emailpersona}"
+                                                                         maxlength="100"/>
+                                                        </div>
+                                                    </div>
+
+                                                    <hr/>
+
+
+
+                                                    <div class="form-group" >
+
+
+                                                        <h:panelGrid columns="2" class="col-md-12">
+                                                            <p:outputLabel value="Área"  class="control-label" />
+                                                            <h:selectOneMenu value="#{usuarioJSFBean.usuario.funcionario.area.idarea}" class="col-md-6 form-control" >
+                                                                <f:selectItems  class="form-control" 
+                                                                                value="#{usuarioJSFBean.lstArea}" 
+                                                                                var="area" 
+                                                                                itemLabel="#{area.nombrearea}"
+                                                                                itemValue="#{area.idarea}">
+
+                                                                </f:selectItems>
+                                                            </h:selectOneMenu>
+
+                                                        </h:panelGrid>
+
+                                                    </div>
+
+                                                    <hr />
+
+                                                    <div class="form-group">
+                                                        <p:outputLabel class="col-md-6 control-label"  value="Teléfono" />
+                                                        <div class="col-md-6">
+                                                            <p:inputText class="form-control"  
+                                                                         placeholder="Teléfono"  
+                                                                         value="#{usuarioJSFBean.usuario.funcionario.persona.telefonopersona}"
+                                                                         maxlength="25"/>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <hr/>
+                                                    
+                                                    <div class="form-group">
+                                                        <p:outputLabel class="col-md-6 control-label"  value="Extensión" />
+                                                        <div class="col-md-6">
+                                                            <p:inputText class="form-control"    
+                                                                         placeholder="Extensión del área" 
+                                                                         value="#{usuarioJSFBean.usuario.funcionario.extension}"
+                                                                         />
+                                                        </div>
+
+
+                                                    </div>
+                                                    <hr/>
+
+
+                                                    <div class="col-md-6 " align="right">
+
+                                                        <p:commandLink class="mb-xs mt-xs mr-xs btn btn-info" 
+                                                                       id="Guardar" value="Guardar" 
+                                                                       update="@form"
+                                                                       action="#{usuarioJSFBean.guardarUsuario}"
+                                                                       />
+                                                    </div>
+
+                                                    <div class="col-md-6 " align="left">
+                                                        <p:commandLink class="mb-xs mt-xs mr-xs btn btn-info" 
+                                                                       id="cancelar"  value="Cancelar"
+                                                                       action="#{equipoJSFBean.regresar}" 
+                                                                       immediate="true" update="@form"
+                                                                       />
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                        </div>
+                                    </section>
+
+                                </div>
+                            </div>
+
+
+
+
+                        </h:panelGroup>
+
+                    </h:panelGroup>
+                </h:form>
+
+
+
+
+
+
+
+                <div class="row">
+
+                    <div class="row">
+
+
+
+                    </div><!-- end: page -->
+
+
+                    <aside id="sidebar-right" class="sidebar-right">
+                        <div class="nano">
+                            <div class="nano-content">
+                                <a href="#" class="mobile-close visible-xs">
+                                    Collapse <i class="fa fa-chevron-right"></i>
+                                </a>
+                                <div class="sidebar-right-wrapper">
+                                    <div class="sidebar-widget widget-calendar">
+                                        <h6>Calendario</h6>
+                                        <div data-plugin-datepicker="" data-plugin-skin="dark" ></div>
+
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+
+
+
+
+            </ui:define>
+        </ui:composition>
+
+
+    </h:body>
+</html>
