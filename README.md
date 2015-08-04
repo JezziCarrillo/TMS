@@ -1,2 +1,0 @@
-# TMS
-Technologic Management Service
